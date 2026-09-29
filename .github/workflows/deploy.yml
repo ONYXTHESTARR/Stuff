@@ -30,6 +30,9 @@ jobs:
       - name: Build
         run: npm run build
       - uses: actions/configure-pages@v5
+        with:
+          # Creates the Pages site automatically — no need to touch repo Settings.
+          enablement: true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
