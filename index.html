@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>onyx's page ⭐</title>
+  <meta name="description" content="onyx's little corner of the internet — about me, socials, ask box, doodle box." />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --font-pixel: "Silkscreen", monospace;
+      --font-body: "Nunito", system-ui, sans-serif;
+      --radius: 14px;
+      --radius-sm: 9px;
+      --shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    /* ---------- DARK (default) ---------- */
+    [data-theme="dark"] {
+      --bg: #12101c;
+      --panel: #221e33;
+      --panel-2: #2a2540;
+      --border: #3a3455;
+      --border-bright: #565076;
+      --text: #f2effa;
+      --muted: #a49ec4;
+      --accent: #ffd166;
+      --accent-2: #9d8cff;
+      --accent-3: #7ee8c7;
+      --accent-soft: rgba(255, 209, 102, 0.14);
+      --star-1: #ffd166;
+      --star-2: #9d8cff;
+      --star-3: #7ee8c7;
+      --star-4: #ff8fab;
+      --star-5: #6ec7ff;
+      --ask-bg: #2a2540;
+      --doodle-grid: rgba(255, 255, 255, 0.04);
+    }
+
+    /* ---------- LIGHT ---------- */
+    [data-theme="light"] {
+      --bg: #fdf8ef;
+      --panel: #fffdf8;
+      --panel-2: #fbf3e4;
+      --border: #e5d8bd;
+      --border-bright: #cdbb92;
+      --text: #3d3554;
+      --muted: #8b8399;
+      --accent: #e8a712;
+      --accent-2: #8a75e8;
+      --accent-3: #3fbf9a;
+      --accent-soft: rgba(232, 167, 18, 0.12);
+      --star-1: #e8a712;
+      --star-2: #8a75e8;
+      --star-3: #3fbf9a;
+      --star-4: #e97ba0;
+      --star-5: #4aa8d8;
+      --ask-bg: #fbf3e4;
+      --doodle-grid: rgba(0, 0, 0, 0.05);
+      --shadow: 0 3px 0 rgba(61, 53, 84, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      transition: background 0.35s ease, color 0.35s ease;
+      background-image:
+        radial-gradient(circle at 12% 8%, var(--accent-soft) 0, transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(157, 140, 255, 0.1) 0, transparent 30%),
+        radial-gradient(circle at 78% 88%, rgba(126, 232, 199, 0.08) 0, transparent 30%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(var(--border) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 18px 16px 60px; }
+
+    /* ---------- top bar ---------- */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 10px 14px; background: var(--panel); border: 2px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 18px; box-shadow: var(--shadow);
+    }
+    .brand { font-family: var(--font-pixel); font-size: 0.95rem; letter-spacing: 0.5px; }
+    .brand .star { color: var(--accent); }
+    .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .btn {
+      font-family: var(--font-pixel); font-size: 0.72rem; cursor: pointer;
+      background: var(--panel-2); color: var(--text);
+      border: 2px solid var(--border); border-radius: var(--radius-sm);
+      padding: 8px 12px; line-height: 1; transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+    }
+    .btn:hover { transform: translateY(-2px); border-color: var(--border-bright); }
+    .btn:active { transform: translateY(1px); box-shadow: none; }
+    .btn.accent { background: var(--accent); border-color: var(--accent); color: #2a2113; }
+    .btn.accent:hover { filter: brightness(1.06); }
+
+    /* ---------- hero ---------- */
+    .hero {
+      background: var(--panel); border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 30px 26px 26px; text-align: center; box-shadow: var(--shadow);
+      position: relative; overflow: hidden; margin-bottom: 18px;
+    }
+    .hero::before, .hero::after {
+      content: "⭐"; position: absolute; font-size: 1.6rem; opacity: 0.8;
+      animation: floaty 5s ease-in-out infinite;
+    }
+    .hero::before { top: 12px; left: 18px; }
+    .hero::after { bottom: 12px; right: 18px; animation-delay: 2.5s; }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(-8deg); }
+      50% { transform: translateY(-7px) rotate(8deg); }
+    }
+
+    .avatar-fallback {
+      width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.6rem; background: var(--panel-2); border: 3px solid var(--accent);
+      box-shadow: 0 0 0 4px var(--panel), 0 0 24px var(--accent-soft);
+    }
+    h1 { font-family: var(--font-pixel); font-size: clamp(1.3rem, 4.5vw, 1.9rem); margin: 6px 0 10px; line-height: 1.3; }
+    h1 .grad {
+      background: linear-gradient(92deg, var(--star-1), var(--star-2), var(--star-3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .tagline { color: var(--muted); max-width: 480px; margin: 0 auto; font-size: 1rem; }
+    .tagline strong { color: var(--text); }
+    .marquee {
+      margin-top: 16px; border-top: 2px dashed var(--border); border-bottom: 2px dashed var(--border);
+      padding: 8px 0; overflow: hidden; white-space: nowrap;
+      font-family: var(--font-pixel); font-size: 0.68rem; color: var(--accent-2);
+    }
+    .marquee span { display: inline-block; animation: scroll-x 18s linear infinite; }
+    @keyframes scroll-x {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    /* ---------- layout ---------- */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .span-2 { grid-column: 1 / -1; }
+
+    .card {
+      background: var(--panel); border: 2px solid var(--border); border-radius: var(--radius);
+      padding: 18px; box-shadow: var(--shadow); transition: transform 0.15s ease, border-color 0.2s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: var(--border-bright); }
+    .card h2 {
+      font-family: var(--font-pixel); font-size: 0.82rem; letter-spacing: 0.5px; margin: 0 0 12px;
+      display: flex; align-items: center; gap: 8px; color: var(--text);
+    }
+    .card h2 .icon { font-size: 1rem; }
+    .card p { color: var(--muted); margin: 0 0 10px; font-size: 0.95rem; }
+    .card p strong { color: var(--text); }
+    .card em { color: var(--muted); }
+
+    /* facts list */
+    .facts { list-style: none; margin: 0; padding: 0; }
+    .facts li {
+      display: flex; gap: 10px; align-items: baseline; padding: 7px 0;
+      border-bottom: 1px dashed var(--border); font-size: 0.95rem; color: var(--muted);
+    }
+    .facts li:last-child { border-bottom: none; }
+    .facts .k { font-family: var(--font-pixel); font-size: 0.66rem; color: var(--accent-2); min-width: 92px; }
+    .facts .v { color: var(--text); }
+
+    /* socials */
+    .socials { display: flex; flex-wrap: wrap; gap: 10px; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+      font-weight: 700; font-size: 0.9rem; color: var(--text);
+      background: var(--panel-2); border: 2px solid var(--border); border-radius: var(--radius-sm);
+      padding: 9px 14px; transition: transform 0.12s ease, border-color 0.2s ease, background 0.2s ease;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+    }
+    .social-btn:hover { transform: translateY(-2px); border-color: var(--accent); background: var(--accent-soft); }
+    .social-btn .em { font-size: 1.1rem; }
+
+    /* ask box */
+    .askbox { display: flex; flex-direction: column; gap: 10px; }
+    textarea, input[type="text"] {
+      font-family: var(--font-body); font-size: 0.95rem; color: var(--text);
+      background: var(--ask-bg); border: 2px solid var(--border); border-radius: var(--radius-sm);
+      padding: 10px 12px; resize: vertical; outline: none; transition: border-color 0.2s ease;
+      width: 100%;
+    }
+    textarea:focus, input[type="text"]:focus { border-color: var(--accent-2); }
+    textarea { min-height: 84px; }
+    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.8; }
+
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .hint { font-size: 0.78rem; color: var(--muted); }
+
+    /* doodle box */
+    .doodle-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .doodle-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    canvas#doodle {
+      width: 100%; height: 220px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+      background:
+        linear-gradient(var(--doodle-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--doodle-grid) 1px, transparent 1px),
+        var(--ask-bg);
+      background-size: 20px 20px, 20px 20px, auto;
+      cursor: crosshair; touch-action: none; display: block;
+    }
+    .swatches { display: flex; gap: 6px; }
+    .swatch {
+      width: 26px; height: 26px; border-radius: 7px; border: 2px solid var(--border);
+      cursor: pointer; padding: 0; transition: transform 0.1s ease, border-color 0.1s ease;
+    }
+    .swatch:hover { transform: scale(1.12); }
+    .swatch.active { border-color: var(--text); box-shadow: 0 0 0 2px var(--panel), 0 0 0 4px var(--border-bright); }
+
+    /* guestbook */
+    .gb-entries { display: flex; flex-direction: column; gap: 10px; max-height: 260px; overflow-y: auto; }
+    .gb-entry { background: var(--panel-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; }
+    .gb-entry .who { font-family: var(--font-pixel); font-size: 0.64rem; color: var(--accent-3); margin-bottom: 4px; }
+    .gb-entry .msg { color: var(--text); font-size: 0.92rem; word-break: break-word; }
+    .gb-entry .when { color: var(--muted); font-size: 0.72rem; margin-top: 4px; }
+
+    /* footer */
+    footer { text-align: center; margin-top: 22px; color: var(--muted); font-size: 0.85rem; }
+    footer .pixel { font-family: var(--font-pixel); font-size: 0.64rem; }
+    footer code { background: var(--panel-2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; font-size: 0.8rem; color: var(--text); }
+
+    /* music pill */
+    .music-pill {
+      position: fixed; bottom: 14px; right: 14px; z-index: 10;
+      background: var(--panel); border: 2px solid var(--border); border-radius: 999px;
+      padding: 8px 14px; font-family: var(--font-pixel); font-size: 0.62rem; color: var(--accent);
+      box-shadow: var(--shadow); cursor: pointer; user-select: none;
+    }
+    .music-pill:hover { border-color: var(--border-bright); }
+
+    /* toast */
+    .toast {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(80px);
+      background: var(--accent); color: #2a2113; font-family: var(--font-pixel); font-size: 0.68rem;
+      padding: 10px 16px; border-radius: var(--radius-sm); box-shadow: var(--shadow);
+      opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; z-index: 20; pointer-events: none;
+      max-width: 90vw; text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+      .facts .k { min-width: 74px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee span, .hero::before, .hero::after { animation: none; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <span class="brand"><span class="star">⭐</span> onyx's page</span>
+      <div class="top-actions">
+        <button class="btn" id="themeBtn" type="button" title="toggle dark/light mode">🌙 dark</button>
+        <button class="btn" id="shuffleBtn" type="button" title="shuffle the star palette">✦ shuffle</button>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="avatar-fallback">🌌</div>
+      <h1>hi, i'm <span class="grad">onyx</span> ⭐</h1>
+      <p class="tagline">
+        idk man this is my little website — i go by <strong>onyx</strong>, i make stuff,
+        and this page is a work in progress forever.
+      </p>
+      <div class="marquee" aria-hidden="true">
+        <span>✦ welcome to my corner of the internet ✦ sign the guestbook ✦ draw me something ✦ be nice ✦ hydrate ✦ welcome to my corner of the internet ✦ sign the guestbook ✦ draw me something ✦ be nice ✦ hydrate ✦</span>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- ABOUT ME -->
+      <section class="card span-2">
+        <h2><span class="icon">🧷</span>about me</h2>
+        <p>
+          welcome to my page!! i'm <strong>onyx</strong> — professional overthinker, amateur everything-else.
+          this is where i'll put my stuff: links, thoughts, doodles, whatever i feel like.
+          poke around, leave a note, and thanks for stopping by <em>( ☆ω☆ )</em>
+        </p>
+        <p class="hint">✏️ everything on this page is yours to edit — it's all in one file: <strong>index.html</strong></p>
+      </section>
+
+      <!-- QUICK FACTS -->
+      <section class="card">
+        <h2><span class="icon">📋</span>quick facts</h2>
+        <ul class="facts">
+          <li><span class="k">name</span><span class="v">onyx</span></li>
+          <li><span class="k">pronouns</span><span class="v">he/him</span></li>
+          <li><span class="k">location</span><span class="v">somewhere on earth 🌍</span></li>
+          <li><span class="k">obsessed with</span><span class="v">you'll have to ask</span></li>
+          <li><span class="k">status</span><span class="v">chronically online</span></li>
+        </ul>
+      </section>
+
+      <!-- SOCIALS -->
+      <section class="card">
+        <h2><span class="icon">🔗</span>find me</h2>
+        <p>swap these for your real links:</p>
+        <div class="socials">
+          <a class="social-btn" href="https://youtube.com" target="_blank" rel="noopener"><span class="em">▶️</span> youtube</a>
+          <a class="social-btn" href="https://twitter.com" target="_blank" rel="noopener"><span class="em">🐦</span> twitter</a>
+          <a class="social-btn" href="https://instagram.com" target="_blank" rel="noopener"><span class="em">📷</span> instagram</a>
+          <a class="social-btn" href="https://tiktok.com" target="_blank" rel="noopener"><span class="em">🎵</span> tiktok</a>
+          <a class="social-btn" href="https://discord.com" target="_blank" rel="noopener"><span class="em">💬</span> discord</a>
+        </div>
+      </section>
+
+      <!-- ASK BOX -->
+      <section class="card span-2">
+        <h2><span class="icon">✉️</span>ask box</h2>
+        <p>send me something anonymous — it lands in the guestbook below. be nice!! <em>( ´ ∀ ` )</em></p>
+        <div class="askbox">
+          <input id="askName" type="text" maxlength="24" placeholder="a name (or leave blank to be anon)" />
+          <textarea id="askMsg" maxlength="280" placeholder="type your message here..."></textarea>
+          <div class="row">
+            <button class="btn accent" id="askSend" type="button">✉ send</button>
+            <span class="hint" id="askCount">0/280</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DOODLE BOX -->
+      <section class="card span-2">
+        <h2><span class="icon">🎨</span>doodle box — save your drawing!</h2>
+        <p>draw something with your mouse or finger, then save it as an image!</p>
+        <div class="doodle-wrap">
+          <canvas id="doodle"></canvas>
+          <div class="doodle-toolbar">
+            <div class="swatches" id="swatches"></div>
+            <button class="btn" id="clearBtn" type="button">🧽 clear</button>
+            <button class="btn accent" id="saveBtn" type="button">💾 save drawing</button>
+          </div>
+          <span class="hint">tip: drawings don't save between visits — hit save to keep one!</span>
+        </div>
+      </section>
+
+      <!-- GUESTBOOK -->
+      <section class="card span-2">
+        <h2><span class="icon">📖</span>guestbook</h2>
+        <p id="gbEmpty" class="hint">nothing here yet — be the first to sign!!</p>
+        <div class="gb-entries" id="gbEntries" hidden></div>
+        <div class="row" style="margin-top: 12px;">
+          <button class="btn" id="gbClear" type="button">🧹 clear guestbook</button>
+          <button class="btn" id="gbExport" type="button">⬇ export</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p><span class="pixel">made with</span> 💜 <span class="pixel">by onyx — no cookies, no tracking, just vibes</span></p>
+      <p class="hint">⭐ edit this page freely — it's all in one file: <code>index.html</code></p>
+    </footer>
+
+    <div class="music-pill" id="musicPill" title="music player placeholder">♪ now playing: (add your song!)</div>
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script>
+    "use strict";
+
+    // ============ helpers ============
+    var toastTimer = null;
+    function toast(text) {
+      var el = document.getElementById("toast");
+      el.textContent = text;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { el.classList.remove("show"); }, 2600);
+    }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    // ============ theme toggle ============
+    var themeBtn = document.getElementById("themeBtn");
+    var html = document.documentElement;
+
+    function applyTheme(t) {
+      html.dataset.theme = t;
+      themeBtn.textContent = t === "dark" ? "🌙 dark" : "☀️ light";
+      themeBtn.title = t === "dark" ? "switch to light mode" : "switch to dark mode";
+      try { localStorage.setItem("onyx-theme", t); } catch (e) { /* private mode */ }
+      setSwatches(); // keep doodle colors in sync with the theme
+    }
+
+    themeBtn.addEventListener("click", function () {
+      applyTheme(html.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    // ============ palette shuffle ============
+    var STAR_VARS = ["--star-1", "--star-2", "--star-3", "--star-4", "--star-5"];
+    document.getElementById("shuffleBtn").addEventListener("click", function () {
+      var root = document.documentElement;
+      var cur = STAR_VARS.map(function (v) { return getComputedStyle(root).getPropertyValue(v).trim(); });
+      cur.unshift(cur.pop());
+      cur.forEach(function (c, i) { root.style.setProperty(STAR_VARS[i], c); });
+      toast("palette shuffled ✦");
+    });
+
+    // ============ ask box + guestbook ============
+    var askName = document.getElementById("askName");
+    var askMsg = document.getElementById("askMsg");
+    var askSend = document.getElementById("askSend");
+    var askCount = document.getElementById("askCount");
+    var gbEntries = document.getElementById("gbEntries");
+    var gbEmpty = document.getElementById("gbEmpty");
+    var GB_KEY = "onyx-guestbook";
+    var entries = [];
+    try { entries = JSON.parse(localStorage.getItem(GB_KEY) || "[]"); } catch (e) { entries = []; }
+    if (!Array.isArray(entries)) entries = [];
+
+    function saveEntries() {
+      try { localStorage.setItem(GB_KEY, JSON.stringify(entries)); } catch (e) { /* ignore */ }
+    }
+
+    function renderEntries() {
+      if (!entries.length) {
+        gbEmpty.hidden = false;
+        gbEntries.hidden = true;
+        gbEntries.innerHTML = "";
+        return;
+      }
+      gbEmpty.hidden = true;
+      gbEntries.hidden = false;
+      gbEntries.innerHTML = entries.slice().reverse().map(function (e) {
+        return (
+          '<div class="gb-entry">' +
+            '<div class="who">' + esc(e.name || "anon") + "</div>" +
+            '<div class="msg">' + esc(e.msg) + "</div>" +
+            '<div class="when">' + new Date(e.ts).toLocaleString() + "</div>" +
+          "</div>"
+        );
+      }).join("");
+    }
+
+    askMsg.addEventListener("input", function () {
+      askCount.textContent = askMsg.value.length + "/280";
+    });
+
+    askSend.addEventListener("click", function () {
+      var msg = askMsg.value.trim();
+      if (!msg) { toast("type something first!!"); askMsg.focus(); return; }
+      entries.push({
+        name: askName.value.trim().slice(0, 24),
+        msg: msg.slice(0, 280),
+        ts: Date.now()
+      });
+      saveEntries();
+      renderEntries();
+      askMsg.value = "";
+      askCount.textContent = "0/280";
+      toast("sent! tysm ✉ (it's in the guestbook below)");
+    });
+
+    document.getElementById("gbClear").addEventListener("click", function () {
+      if (!entries.length) { toast("guestbook is already empty"); return; }
+      if (confirm("clear all guestbook entries?")) {
+        entries = [];
+        saveEntries();
+        renderEntries();
+        toast("guestbook cleared 🧹");
+      }
+    });
+
+    document.getElementById("gbExport").addEventListener("click", function () {
+      if (!entries.length) { toast("guestbook is empty"); return; }
+      var blob = new Blob([JSON.stringify(entries, null, 2)], { type: "application/json" });
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "guestbook-" + new Date().toISOString().slice(0, 10) + ".json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    renderEntries();
+
+    // ============ doodle box ============
+    var canvas = document.getElementById("doodle");
+    var ctx = canvas.getContext("2d");
+    var swatchesEl = document.getElementById("swatches");
+    var DOODLE_COLORS_DARK = ["#ff8fab", "#ffd166", "#7ee8c7", "#6ec7ff", "#9d8cff", "#f2effa", "#ffffff"];
+    var DOODLE_COLORS_LIGHT = ["#e97ba0", "#e8a712", "#3fbf9a", "#4aa8d8", "#8a75e8", "#3d3554", "#2a2113"];
+    var currentColor = DOODLE_COLORS_DARK[0];
+    var drawing = false;
+    var last = null;
+
+    function fitCanvas() {
+      var rect = canvas.getBoundingClientRect();
+      if (!rect.width) return;
+      var dpr = window.devicePixelRatio || 1;
+      var snapshot = canvas.toDataURL();
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var img = new Image();
+      img.onload = function () { ctx.drawImage(img, 0, 0, rect.width, rect.height); };
+      img.src = snapshot;
+    }
+
+    function pos(e) {
+      var r = canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
+    }
+
+    canvas.addEventListener("pointerdown", function (e) {
+      drawing = true;
+      last = pos(e);
+      canvas.setPointerCapture(e.pointerId);
+    });
+
+    canvas.addEventListener("pointermove", function (e) {
+      if (!drawing || !last) return;
+      var p = pos(e);
+      ctx.strokeStyle = currentColor;
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.moveTo(last.x, last.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      last = p;
+    });
+
+    window.addEventListener("pointerup", function () { drawing = false; last = null; });
+
+    function setSwatches() {
+      var light = html.dataset.theme === "light";
+      var colors = light ? DOODLE_COLORS_LIGHT : DOODLE_COLORS_DARK;
+      currentColor = colors[0];
+      swatchesEl.innerHTML = "";
+      colors.forEach(function (c, i) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "swatch" + (i === 0 ? " active" : "");
+        b.style.background = c;
+        b.title = c;
+        b.addEventListener("click", function () {
+          var all = swatchesEl.querySelectorAll(".swatch");
+          for (var j = 0; j < all.length; j++) all[j].classList.remove("active");
+          b.classList.add("active");
+          currentColor = c;
+        });
+        swatchesEl.appendChild(b);
+      });
+    }
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      toast("canvas cleared 🧽");
+    });
+
+    document.getElementById("saveBtn").addEventListener("click", function () {
+      var a = document.createElement("a");
+      a.href = canvas.toDataURL("image/png");
+      a.download = "doodle.png";
+      a.click();
+      toast("saved doodle.png 🎨");
+    });
+
+    window.addEventListener("resize", fitCanvas);
+    fitCanvas();
+    setSwatches();
+
+    // ============ music pill (placeholder — swap in a real audio URL) ============
+    var musicPill = document.getElementById("musicPill");
+    musicPill.addEventListener("click", function () {
+      toast("add your song in index.html — search for 'music pill' ✏️");
+    });
+
+    // ============ init theme (after swatches exist) ============
+    var savedTheme = null;
+    try { savedTheme = localStorage.getItem("onyx-theme"); } catch (e) { /* ignore */ }
+    applyTheme(savedTheme === "light" ? "light" : "dark");
+  </script>
+</body>
+</html>
