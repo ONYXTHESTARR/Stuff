@@ -9,35 +9,35 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Silkscreen&family=VT323&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --font-pixel: "Silkscreen", monospace;
-      --font-body: "Nunito", system-ui, sans-serif;
-      --radius: 14px;
-      --radius-sm: 9px;
+      --font-body: "Baloo 2", "Comic Sans MS", "Nunito", system-ui, sans-serif;
+      --radius: 10px;
+      --radius-sm: 7px;
       --shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
     }
 
     /* ---------- DARK (default) ---------- */
     [data-theme="dark"] {
-      --bg: #12101c;
-      --panel: #221e33;
-      --panel-2: #2a2540;
-      --border: #3a3455;
-      --border-bright: #565076;
-      --text: #f2effa;
-      --muted: #a49ec4;
-      --accent: #ffd166;
-      --accent-2: #9d8cff;
+      --bg: #09090f;
+      --panel: #14101f;
+      --panel-2: #1c1530;
+      --border: #3d2a63;
+      --border-bright: #6a4bb0;
+      --text: #f4f0ff;
+      --muted: #b3a8d4;
+      --accent: #8a2be2;
+      --accent-2: #c58cff;
       --accent-3: #7ee8c7;
-      --accent-soft: rgba(255, 209, 102, 0.14);
-      --star-1: #ffd166;
-      --star-2: #9d8cff;
-      --star-3: #7ee8c7;
-      --star-4: #ff8fab;
-      --star-5: #6ec7ff;
-      --ask-bg: #2a2540;
+      --accent-soft: rgba(138, 43, 226, 0.22);
+      --star-1: #c58cff;
+      --star-2: #8a2be2;
+      --star-3: #ff8fab;
+      --star-4: #7ee8c7;
+      --star-5: #ffd166;
+      --ask-bg: #1c1530;
       --doodle-grid: rgba(255, 255, 255, 0.04);
     }
 
@@ -50,12 +50,12 @@
       --border-bright: #cdbb92;
       --text: #3d3554;
       --muted: #8b8399;
-      --accent: #e8a712;
-      --accent-2: #8a75e8;
+      --accent: #8a2be2;
+      --accent-2: #a86ef5;
       --accent-3: #3fbf9a;
-      --accent-soft: rgba(232, 167, 18, 0.12);
-      --star-1: #e8a712;
-      --star-2: #8a75e8;
+      --accent-soft: rgba(138, 43, 226, 0.12);
+      --star-1: #a86ef5;
+      --star-2: #8a2be2;
       --star-3: #3fbf9a;
       --star-4: #e97ba0;
       --star-5: #4aa8d8;
@@ -73,11 +73,29 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      text-transform: lowercase;
       transition: background 0.35s ease, color 0.35s ease;
       background-image:
         radial-gradient(circle at 12% 8%, var(--accent-soft) 0, transparent 28%),
-        radial-gradient(circle at 88% 14%, rgba(157, 140, 255, 0.1) 0, transparent 30%),
-        radial-gradient(circle at 78% 88%, rgba(126, 232, 199, 0.08) 0, transparent 30%);
+        radial-gradient(circle at 88% 14%, rgba(138, 43, 226, 0.12) 0, transparent 30%),
+        radial-gradient(circle at 78% 88%, rgba(255, 143, 171, 0.07) 0, transparent 30%);
+    }
+
+    [data-theme="dark"] body {
+      background: linear-gradient(45deg, #09090f, #1a0a2a, #09090f);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite, flicker 4s infinite;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes flicker {
+      0%, 90%, 100% { opacity: 1; }
+      92% { opacity: 0.88; }
+      93% { opacity: 1; }
+      96% { opacity: 0.94; }
     }
 
     body::before {
@@ -91,7 +109,7 @@
       z-index: 0;
     }
 
-    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 18px 16px 60px; }
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 18px 16px 60px; transition: transform 0.08s linear; will-change: transform; }
 
     /* ---------- top bar ---------- */
     .topbar {
@@ -113,7 +131,7 @@
     }
     .btn:hover { transform: translateY(-2px); border-color: var(--border-bright); }
     .btn:active { transform: translateY(1px); box-shadow: none; }
-    .btn.accent { background: var(--accent); border-color: var(--accent); color: #2a2113; }
+    .btn.accent { background: var(--accent); border-color: var(--accent); color: #ffffff; }
     .btn.accent:hover { filter: brightness(1.06); }
 
     /* ---------- hero ---------- */
@@ -256,7 +274,7 @@
     /* toast */
     .toast {
       position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(80px);
-      background: var(--accent); color: #2a2113; font-family: var(--font-pixel); font-size: 0.68rem;
+      background: var(--accent); color: #ffffff; font-family: var(--font-pixel); font-size: 0.68rem;
       padding: 10px 16px; border-radius: var(--radius-sm); box-shadow: var(--shadow);
       opacity: 0; transition: transform 0.25s ease, opacity 0.25s ease; z-index: 20; pointer-events: none;
       max-width: 90vw; text-align: center;
@@ -268,10 +286,37 @@
       .facts .k { min-width: 74px; }
     }
 
+    /* ---------- crt / noise / cursor ---------- */
+    html {
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%238a2be2' stroke='%2312081c' stroke-width='1.5' d='M12 1.5l3 6.8 7.4.6-5.6 4.9 1.7 7.2-6.5-3.9-6.5 3.9 1.7-7.2L1.6 8.9 9 8.3z'/></svg>") 12 12, auto;
+    }
+    a, button, canvas, .swatch {
+      cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%23ff8fab' stroke='%2312081c' stroke-width='1.5' d='M12 1.5l3 6.8 7.4.6-5.6 4.9 1.7 7.2-6.5-3.9-6.5 3.9 1.7-7.2L1.6 8.9 9 8.3z'/></svg>") 12 12, pointer;
+    }
+    input[type="text"], textarea { cursor: text; }
+
+    .crt {
+      position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0.5;
+      background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.13) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.015), rgba(0, 0, 255, 0.03));
+      background-size: 100% 3px, 3px 100%;
+    }
+    .noise {
+      position: fixed; inset: 0; z-index: 89; pointer-events: none; opacity: 0.05;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='0.6'/></svg>");
+    }
+
+    .bedrot { font-family: var(--font-pixel); font-size: 0.6rem; color: var(--accent-2); margin-top: 6px; }
+
     /* ---------- indie web extras ---------- */
     h1 .grad { animation: hue 6s linear infinite; }
     @keyframes hue { to { filter: hue-rotate(360deg); } }
 
+    .grid .card:nth-child(1) { transform: rotate(-0.7deg); }
+    .grid .card:nth-child(2) { transform: rotate(0.5deg); }
+    .grid .card:nth-child(3) { transform: rotate(0.4deg); }
+    .grid .card:nth-child(4) { transform: rotate(-0.4deg); }
     .grid .card:nth-child(odd):hover { transform: rotate(-1.2deg) translateY(-2px); }
     .grid .card:nth-child(even):hover { transform: rotate(1.2deg) translateY(-2px); }
 
@@ -356,11 +401,14 @@
     @media (prefers-reduced-motion: reduce) {
       .marquee span, .hero::before, .hero::after, .blinkie, .divider, .sticker,
       h1 .grad, .music-pill.playing .eq-bars i { animation: none !important; }
+      [data-theme="dark"] body { animation: none !important; }
       * { transition: none !important; }
     }
   </style>
 </head>
 <body>
+  <div class="crt" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true">‌</div>
   <div class="sticker s1" aria-hidden="true">⭐</div>
   <div class="sticker s2" aria-hidden="true">✧</div>
   <div class="sticker s3" aria-hidden="true">💜</div>
@@ -482,6 +530,7 @@
       <p><span class="pixel">made with</span> 💜 <span class="pixel">by onyx — no cookies, no tracking, js me</span></p>
       <p class="hint">skibidi <code>index.html</code></p>
       <p class="counter" id="visitorCount" aria-live="polite">✧ loading visitor count… ✧</p>
+      <p class="bedrot">days since last bedrot: <span id="bedrotCount">0</span></p>
     </footer>
 
     <div class="music-pill" id="musicPill" title="click me for 8-bit vibes">
@@ -760,6 +809,22 @@
       document.body.appendChild(s);
       setTimeout(function () { s.remove(); }, 900);
     });
+
+    // ============ mouse tilt (like the neocities parallax) ============
+    var pageEl = document.querySelector(".page");
+    document.addEventListener("pointermove", function (e) {
+      var nx = e.clientX / window.innerWidth - 0.5;
+      var ny = e.clientY / window.innerHeight - 0.5;
+      pageEl.style.transform =
+        "rotateY(" + (nx * 2.2) + "deg) rotateX(" + (-ny * 2.2) + "deg)";
+    });
+
+    // ============ days since last bedrot (edit the date below!) ============
+    (function () {
+      var BEDROT_DATE = new Date("2026-09-30"); // ← change this when you bedrot again lmao
+      var days = Math.max(0, Math.floor((Date.now() - BEDROT_DATE.getTime()) / 86400000));
+      document.getElementById("bedrotCount").textContent = days;
+    })();
 
     // ============ visitor counter (just for fun — counts this browser) ============
     (function () {
