@@ -10,7 +10,7 @@ fs.mkdirSync(dist, { recursive: true });
 fs.copyFileSync(path.join(root, "index.html"), path.join(dist, "index.html"));
 
 // Ship every png/jpg/gif/webp sitting in the repo root (e.g. avatar.png).
-const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".gif", ".webp"]);
+const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".jfif", ".gif", ".webp"]);
 for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
   if (entry.isFile() && IMAGE_EXTS.has(path.extname(entry.name).toLowerCase())) {
     fs.copyFileSync(path.join(root, entry.name), path.join(dist, entry.name));
