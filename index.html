@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&family=VT323&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --font-pixel: "Silkscreen", monospace;
@@ -65,6 +65,7 @@
     }
 
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
 
     body {
       margin: 0;
@@ -267,13 +268,103 @@
       .facts .k { min-width: 74px; }
     }
 
+    /* ---------- indie web extras ---------- */
+    h1 .grad { animation: hue 6s linear infinite; }
+    @keyframes hue { to { filter: hue-rotate(360deg); } }
+
+    .grid .card:nth-child(odd):hover { transform: rotate(-1.2deg) translateY(-2px); }
+    .grid .card:nth-child(even):hover { transform: rotate(1.2deg) translateY(-2px); }
+
+    .divider {
+      height: 9px; border-radius: 5px; margin: 2px 0 18px; opacity: .9;
+      background: repeating-linear-gradient(-45deg,
+        var(--star-1) 0 12px, var(--star-2) 12px 24px,
+        var(--star-3) 24px 36px, var(--star-4) 36px 48px);
+      animation: stripes 8s linear infinite;
+    }
+    @keyframes stripes { to { background-position: 67.9px 0; } }
+
+    .blinkie-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 18px; }
+    .blinkie {
+      font-family: var(--font-pixel); font-size: .55rem; letter-spacing: .5px; text-transform: uppercase;
+      padding: 7px 10px; border: 2px solid #1c1626; border-radius: 3px; color: #1c1626;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), 2px 2px 0 rgba(0,0,0,.35);
+      animation: wiggle 2.4s ease-in-out infinite; cursor: default; user-select: none;
+    }
+    .blinkie:nth-child(2n) { animation-delay: 1.2s; }
+    .b-yellow { background: linear-gradient(180deg,#ffe9a3,#ffd166); }
+    .b-pink { background: linear-gradient(180deg,#ffd3e0,#ff8fab); }
+    .b-purple { background: linear-gradient(180deg,#ded4ff,#9d8cff); }
+    .b-mint { background: linear-gradient(180deg,#c9f7e6,#7ee8c7); }
+    @keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-1.6deg); } 75% { transform: rotate(1.6deg); } }
+
+    .avatar-wrap { position: relative; width: 132px; margin: 0 auto 16px; transform: rotate(-3deg); }
+    .avatar-wrap img, .avatar-fallback {
+      width: 132px; height: 132px; object-fit: cover; border-radius: 8px; display: block;
+      border: 3px solid var(--text); background: var(--panel-2);
+      box-shadow: 5px 5px 0 var(--accent), 10px 10px 0 rgba(0,0,0,.18);
+    }
+    .avatar-fallback { display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .tape {
+      position: absolute; width: 52px; height: 18px; background: rgba(255,255,255,.4);
+      border: 1px dashed rgba(255,255,255,.65); top: -9px; z-index: 2;
+    }
+    .tape-l { left: -16px; transform: rotate(-38deg); }
+    .tape-r { right: -16px; transform: rotate(38deg); }
+    .avatar-caption {
+      font-family: var(--font-pixel); font-size: .55rem; color: var(--accent);
+      margin-top: 10px; text-align: center; text-shadow: 1px 1px 0 rgba(0,0,0,.4);
+    }
+
+    .sparkle {
+      position: fixed; z-index: 60; pointer-events: none;
+      text-shadow: 0 0 8px currentColor; animation: sparkle-pop .9s ease-out forwards;
+    }
+    @keyframes sparkle-pop {
+      0% { opacity: 1; transform: translate(0,0) scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: translate(0,-22px) scale(.25) rotate(50deg); }
+    }
+
+    .sticker { position: fixed; z-index: 0; pointer-events: none; opacity: .5; font-size: 1.7rem; animation: bob 6s ease-in-out infinite; }
+    .sticker.s1 { top: 130px; left: 4vw; }
+    .sticker.s2 { top: 340px; right: 4vw; animation-delay: 2s; }
+    .sticker.s3 { bottom: 120px; left: 6vw; animation-delay: 4s; }
+    @keyframes bob { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-12px) rotate(10deg); } }
+
+    .construction {
+      display: inline-block; font-family: var(--font-pixel); font-size: .58rem; color: #1c1626;
+      background: repeating-linear-gradient(-45deg,#ffd166 0 12px,#1c1626 12px 24px);
+      border: 2px solid #1c1626; border-radius: 4px; padding: 3px 6px; margin-bottom: 10px;
+      box-shadow: 2px 2px 0 rgba(0,0,0,.35);
+    }
+    .construction span { background: #ffd166; padding: 0 4px; border-radius: 2px; }
+
+    .counter {
+      font-family: "VT323", monospace; font-size: 1.05rem;
+      color: var(--accent-3); margin-top: 8px; letter-spacing: 1px;
+    }
+
+    .music-pill .eq-bars { display: none; margin-left: 6px; }
+    .music-pill.playing .eq-bars { display: inline-flex; gap: 2px; align-items: flex-end; height: 10px; }
+    .music-pill.playing .eq-bars i { width: 3px; background: var(--accent); animation: eq .6s ease-in-out infinite; }
+    .music-pill.playing .eq-bars i:nth-child(2) { animation-delay: .2s; }
+    .music-pill.playing .eq-bars i:nth-child(3) { animation-delay: .4s; }
+    @keyframes eq { 0%,100% { height: 3px; } 50% { height: 10px; } }
+
+    @media (max-width: 900px) { .sticker { display: none; } }
+
     @media (prefers-reduced-motion: reduce) {
-      .marquee span, .hero::before, .hero::after { animation: none; }
+      .marquee span, .hero::before, .hero::after, .blinkie, .divider, .sticker,
+      h1 .grad, .music-pill.playing .eq-bars i { animation: none !important; }
       * { transition: none !important; }
     }
   </style>
 </head>
 <body>
+  <div class="sticker s1" aria-hidden="true">⭐</div>
+  <div class="sticker s2" aria-hidden="true">✧</div>
+  <div class="sticker s3" aria-hidden="true">💜</div>
+
   <div class="page">
     <div class="topbar">
       <span class="brand"><span class="star">⭐</span> onyx's page</span>
@@ -283,8 +374,21 @@
       </div>
     </div>
 
+    <div class="blinkie-row" aria-hidden="true">
+      <span class="blinkie b-yellow">★ certified yapper ★</span>
+      <span class="blinkie b-pink">scenecore femboy</span>
+      <span class="blinkie b-purple">pardon my swag</span>
+      <span class="blinkie b-mint">epic content inside</span>
+    </div>
+
     <header class="hero">
-      <div class="avatar-fallback">🌌</div>
+      <div class="avatar-wrap">
+        <span class="tape tape-l" aria-hidden="true"></span>
+        <span class="tape tape-r" aria-hidden="true"></span>
+        <div class="avatar-fallback" id="avatarFallback">🌌</div>
+        <img id="avatarImg" alt="my avatar — drop avatar.png in the repo to swap it!" style="display: none" />
+      </div>
+      <p class="avatar-caption">&lt;33* me irl</p>
       <h1>hi, i'm <span class="grad">onyx</span> ⭐</h1>
       <p class="tagline">
         idk this is my little website — i go by <strong>Onyx, and bleeeh_39</strong>, i make stuff,
@@ -294,6 +398,8 @@
         <span>✦ welcome to my corner of the internet ✦ sign the guestbook ✦ draw me something ✦ be nice ✦ glaze me ✦ welcome to my corner of the internet ✦ sign the guestbook ✦ draw me something ✦ be nice ✦ hydrate ✦</span>
       </div>
     </header>
+
+    <div class="divider" aria-hidden="true"></div>
 
     <main class="grid">
       <!-- ABOUT ME -->
@@ -372,11 +478,16 @@
     </main>
 
     <footer>
+      <div class="construction" title="forever, baby"><span>🚧 under construction</span> 🚧</div>
       <p><span class="pixel">made with</span> 💜 <span class="pixel">by onyx — no cookies, no tracking, js me</span></p>
       <p class="hint">skibidi <code>index.html</code></p>
+      <p class="counter" id="visitorCount" aria-live="polite">✧ loading visitor count… ✧</p>
     </footer>
 
-    <div class="music-pill" id="musicPill" title="music player placeholder">♪ now playing: nothing</div>
+    <div class="music-pill" id="musicPill" title="click me for 8-bit vibes">
+      <span id="musicLabel">♪ now playing: nothing</span>
+      <span class="eq-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </div>
     <div class="toast" id="toast"></div>
   </div>
 
@@ -590,11 +701,89 @@
     fitCanvas();
     setSwatches();
 
-    // ============ music pill (placeholder — swap in a real audio URL) ============
+    // ============ music pill — 8-bit chiptune loop (WebAudio, no files needed) ============
     var musicPill = document.getElementById("musicPill");
-    musicPill.addEventListener("click", function () {
-      toast("add your song in index.html — search for 'music pill' ✏️");
+    var musicLabel = document.getElementById("musicLabel");
+    var audioCtx = null, musicTimer = null, musicOn = false, chipStep = 0;
+    var CHIP_MELODY = [440, 0, 523, 0, 659, 587, 523, 0, 440, 0, 392, 440, 523, 0, 587, 0];
+    function chipNote(freq, t) {
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = "square";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.05, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(t);
+      osc.stop(t + 0.2);
+    }
+    function musicToggle() {
+      if (!musicOn) {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        musicOn = true;
+        chipStep = 0;
+        musicLabel.textContent = "♪ now playing: 8-bit loop";
+        musicPill.classList.add("playing");
+        musicTimer = setInterval(function () {
+          var f = CHIP_MELODY[chipStep % CHIP_MELODY.length];
+          if (f) chipNote(f, audioCtx.currentTime);
+          chipStep++;
+        }, 200);
+        toast("8-bit vibes on ♪");
+      } else {
+        musicOn = false;
+        clearInterval(musicTimer);
+        musicLabel.textContent = "♪ now playing: nothing";
+        musicPill.classList.remove("playing");
+        toast("music paused");
+      }
+    }
+    musicPill.addEventListener("click", musicToggle);
+
+    // ============ sparkle cursor trail ============
+    var SPARKLE_CHARS = ["✦", "✧", "⭐", "・"];
+    var SPARKLE_COLORS = ["#ffd166", "#9d8cff", "#7ee8c7", "#ff8fab"];
+    var lastSparkle = 0;
+    document.addEventListener("pointermove", function (e) {
+      var now = Date.now();
+      if (now - lastSparkle < 60) return;
+      lastSparkle = now;
+      var s = document.createElement("span");
+      s.className = "sparkle";
+      s.textContent = SPARKLE_CHARS[Math.floor(Math.random() * SPARKLE_CHARS.length)];
+      s.style.left = e.clientX - 4 + "px";
+      s.style.top = e.clientY - 4 + "px";
+      s.style.color = SPARKLE_COLORS[Math.floor(Math.random() * SPARKLE_COLORS.length)];
+      s.style.fontSize = 8 + Math.random() * 10 + "px";
+      document.body.appendChild(s);
+      setTimeout(function () { s.remove(); }, 900);
     });
+
+    // ============ visitor counter (just for fun — counts this browser) ============
+    (function () {
+      var el = document.getElementById("visitorCount");
+      var n = 0;
+      try { n = parseInt(localStorage.getItem("onyx-visits") || "0", 10) || 0; } catch (e) { /* ignore */ }
+      n += 1;
+      try { localStorage.setItem("onyx-visits", String(n)); } catch (e) { /* ignore */ }
+      var digits = String(n);
+      while (digits.length < 6) digits = "0" + digits;
+      el.textContent = "✧ you are visitor #" + digits + " ✧";
+    })();
+
+    // ============ avatar auto-swap: drop avatar.png in the repo root ============
+    (function () {
+      var img = document.getElementById("avatarImg");
+      var fallback = document.getElementById("avatarFallback");
+      img.addEventListener("load", function () {
+        img.style.display = "block";
+        img.alt = "onyx's avatar";
+        if (fallback) fallback.style.display = "none";
+      });
+      img.src = "avatar.png?v=" + Date.now();
+    })();
 
     // ============ init theme (after swatches exist) ============
     var savedTheme = null;
